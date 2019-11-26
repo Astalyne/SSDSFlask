@@ -80,7 +80,7 @@
                   <span class="navbar-toggler-bar bar3"></span>
                 </button>
               </div>
-              <a class="navbar-brand" href="javascript:void(0)">Add Food Item</a>
+              <a class="navbar-brand" href="javascript:void(0)">Edit Food Item</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -148,37 +148,31 @@
         <div class="content">
         <div class="card">
           <div class ="card-body">
-              {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
-              <p class="alert alert-danger" role="alert">{{ message }}</p>
-              {% endfor %} {% endif %} {% endwith %}
             <form action="#" method="post">
                 <div class="form-group">
                     <label for="fid">Food Item</label>
-                    <input type="Name" class="form-control" name="fid"  placeholder="Enter Food ID">
+                    <input type="Name" class="form-control" name="fid"  value="{{foodItem.fid}}">
                   </div>
                   <div class="form-group">
                       <label for="name">Name</label>
-                      <input style="height:50px;" type="Description" class="form-control" name="name"  placeholder="Enter Name">
+                      <input style="height:50px;" type="Description" class="form-control" name="name"  value="{{foodItem.name}}">
                     </div>
                     <div class="form-group">
                       <label for="cfid">Category ID</label>
-                      <Select class="form-control" name="cfid" ">
-                        {% for category in foodcategories %}
-                        <option value="{{category.cfid}}">{{category.cfid}} .{{category.name}}</option>
-                        {% endfor %}
-                        </Select>
+                      <input style="height:50px"  class="form-control" name="cfid" value="{{foodItem.cfid}}"">
                     </div>
                     <div class="form-group">
                       <label for="price">Price</label>
-                      <input type="stsid" class="form-control" name="price"  placeholder="Enter Price">
+                      <input type="stsid" class="form-control" name="price"  value="{{foodItem.price}}">
                       <div class="form-group">
                           <label for="description">Description</label>
-                        <input type="description" class="form-control" name="description"  placeholder="Enter Description">
+                        <input type="description" class="form-control" name="description"  value="{{foodItem.description}}">
                     </div>
                     <div class="form-group">
                         <label for="stsid">Status ID</label>
-                        <input type="stsid" class="form-control" name="stsid"  placeholder="Enter Status ID">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                        <input type="stsid" class="form-control" name="stsid"  value="{{foodItem.stsid}}">
+                        <button type="submit" name ="submit_button" value ="submit"class="btn btn-primary">Submit</button>
+                        <button type="submit" name ="submit_button" value= "delete"class="btn btn-primary">Delete</button>
 
             </form>
           </div>

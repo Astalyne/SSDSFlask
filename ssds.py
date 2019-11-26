@@ -112,14 +112,14 @@ def addFoodItem():
         foodcategories = session.query(FoodCategory).all()
         return render_template('addFoodItem.html',foodcategories=foodcategories)
 
-@app.route('/categories/<int:fooditem_id>',
+@app.route('/fooditems/<int:fooditem_id>',
            methods=['GET', 'POST'])
 def editFoodItem(fooditem_id):
  
     # Get all categories
     foodItem = session.query(FoodItem).filter_by(fid=fooditem_id).first()
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.form['submit_button'] == 'submit' :
         if request.form['name']:
             foodItem.name=request.form['name']
 
@@ -137,11 +137,177 @@ def editFoodItem(fooditem_id):
             
         if  request.form['stsid']:
             foodItem.stsid=request.form['stsid']
+        session.add(foodItem)
+        session.commit()
+        return redirect(url_for('showDashboard'))
+
+    if request.method == 'POST' and request.form['submit_button'] == 'delete':
+        session.delete(foodItem)
+        session.commit()
+        return redirect(url_for('showDashboard'))
+
+    else:
+
+        return render_template('editFoodItem.html',
+                               foodItem=foodItem)
+
+@app.route('/foodCategory/<string:cfid>',
+           methods=['GET', 'POST'])
+def editFoodCategory(cfid):
+ 
+    # Get all categories
+    foodCategory = session.query(FoodCategory).filter_by(cfid=cfid).first()
+
+    if request.method == 'POST' and request.form['submit_button'] == 'submit' :
+        if request.form['cfid']:
+            foodCategory.cfid=request.form['cfid']
+
+        if  request.form['name']:
+            foodCategory.name=request.form['name']
+
+        if  request.form['description']:
+            foodCategory.description=request.form['description']
+
+        if  request.form['stsid']:
+            foodCategory.stsid=request.form['stsid']
+
+        session.add(foodCategory)
+        session.commit()
+        return redirect(url_for('showDashboard'))
+    if request.method == 'POST' and request.form['submit_button'] == 'delete':
+        session.delete(foodCategory)
+        session.commit()
+        return redirect(url_for('showDashboard'))
+
+    else:
+
+        return render_template('editFoodCategory.html',
+                               foodCategory=foodCategory)
+
+@app.route('/addStatusType', methods=['GET', 'POST'])
+def addStatus():
+    
+    if request.method == 'POST':
+
+        if not request.form['stsid']:
+            flash('Please enter status id')
+            return redirect(url_for('addStatus'))
+
+        if not request.form['ststid']:
+            flash('Please enter Status Type ID')
+            return redirect(url_for('addStatus'))
+
+        if not request.form['name']:
+            flash('Please enter status name')
+            return redirect(url_for('addStatus'))
+
+        if not request.form['description']:
+            flash('Please enter description')
+            return redirect(url_for('addStatus'))
+
+        newStatus = Status(stsid=request.form['stsid'],
+                                    ststid=request.form['ststid'],
+                                     name=request.form['name'],
+                                    description=request.form['description'])
+        session.add(newStatus)
+        session.commit()
 
         return redirect(url_for('showDashboard'))
     else:
-        return render_template('editFoodItem.html',
-                               fooditem_id=fooditem_id)
+        # Get all status types
+        statusTypes=session.query(StatusType).all()
+        return render_template('addStatus.html',statusTypes=statusTypes)
+
+@app.route('/addStatus', methods=['GET', 'POST'])
+def addStatusType():
+    
+    if request.method == 'POST':
+
+        if not request.form['ststid']:
+            flash('Please enter status type id')
+            return redirect(url_for('addStatusType'))
+
+        if not request.form['description']:
+            flash('Please enter Status Type ID')
+            return redirect(url_for('addStatusType'))
+
+        if not request.form['entity']:
+            flash('Please enter entity name')
+            return redirect(url_for('addStatusType'))
+
+
+        newStatusType = StatusType(ststid=request.form['ststid'],
+                                    entity=request.form['entity'],
+                                    description=request.form['description'])
+        session.add(newStatusType)
+        session.commit()
+
+        return redirect(url_for('showDashboard'))
+    else:
+        # Get all status types
+        return render_template('addStatusType.html')
+
+@app.route('/editStatus/<string:stsid>', methods=['GET', 'POST'])
+def editStatus(stsid):
+ 
+    # Get all categories
+    status = session.query(Status).filter_by(stsid=stsid).first()
+
+    if request.method == 'POST' and request.form['submit_button'] == 'submit' :
+        if request.form['stsid']:
+            status.name=request.form['stsid']
+
+        if  request.form['ststid']:
+            status.fid=request.form['ststid']
+
+        if  request.form['name']:
+            status.cfid=request.form['name']
+
+        if  request.form['description']:
+            status.description=request.form['description']
+        session.add(status)
+        session.commit()
+        return redirect(url_for('showDashboard'))
+    if request.method == 'POST' and request.form['submit_button'] == 'delete':
+        session.delete(status)
+        session.commit()
+        return redirect(url_for('showDashboard'))
+
+
+    else:
+
+        return render_template('editStatus.html',
+                               status=status)
+
+@app.route('/editStatusType/<string:ststid>', methods=['GET', 'POST'])
+def editStatusType(ststid):
+ 
+    # Get all categories
+    statusType = session.query(StatusType).filter_by(ststid=ststid).first()
+
+    if request.method == 'POST' and request.form['submit_button'] == 'submit' :
+        if request.form['ststid']:
+            statusType.ststid=request.form['ststid']
+
+        if  request.form['description']:
+            statusType.description=request.form['description']
+        
+        if  request.form['entity']:
+            statusType.entity=request.form['entity']
+
+        session.add(statusType)
+        session.commit()
+        return redirect(url_for('showDashboard'))
+
+    if request.method == 'POST' and request.form['submit_button'] == 'delete':
+        session.delete(statusType)
+        session.commit()
+        return redirect(url_for('showDashboard'))
+
+    else:
+
+        return render_template('editStatusType.html',
+                               statusType=statusType)
 
 
 

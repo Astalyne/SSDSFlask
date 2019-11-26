@@ -278,6 +278,13 @@ textarea {
   line-height: inherit;
 }
 
+select option {
+  margin: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
 button,
 input {
   overflow: visible;
@@ -2195,6 +2202,7 @@ select.form-control[multiple] {
 
 textarea.form-control {
   height: auto;
+  background-color: #818181;
 }
 
 .form-group {
@@ -6054,11 +6062,13 @@ a.badge-darker.focus {
   flex-direction: column;
   padding-left: 0;
   margin-bottom: 0;
+  color: #600fe2;
+  background-color: #853d89;
 }
 
 .list-group-item-action {
   width: 100%;
-  color: #525f7f;
+  color: #600fe2;
   text-align: inherit;
 }
 
@@ -6080,7 +6090,7 @@ a.badge-darker.focus {
   display: block;
   padding: 1rem 1rem;
   margin-bottom: -0.0625rem;
-  background-color: #ffffff;
+  background-color: #040007;
   border: 0.0625rem solid #e9ecef;
 }
 
@@ -16474,6 +16484,7 @@ optgroup,
 select,
 textarea {
   font-family: "Poppins", sans-serif;
+  background-color: #7af8e0;
 }
 
 .card h1,
