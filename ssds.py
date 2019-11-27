@@ -23,8 +23,8 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
-@app.route('/')
 @app.route('/dashboard')
+@app.route('/')
 def showDashboard():
     statusTypes=session.query(StatusType).all()
     statuses=   session.query(Status).all()
@@ -32,6 +32,95 @@ def showDashboard():
     foodItems     =session.query(FoodItem).all()
 
     return render_template('dashboard.html',foodCategories=foodCategories,foodItems=foodItems,statuses=statuses,statusTypes=statusTypes)
+
+@app.route('/Cashiers')
+def showCashiers():
+    cashiers=session.query(Employee).filter_by(etid='ET2')
+
+    return render_template('cashiers.html',cashiers=cashiers)
+
+@app.route('/Cashiers/<string:eid>', methods=['GET', 'POST'])
+def editCashier(eid):
+    cashier=session.query(Employee).filter_by(eid=eid).first()
+
+    if request.method == 'POST' and request.form['submit_button'] == 'submit':
+        if request.form['eid']:
+            cashier.eid=request.form['eid']
+
+        if  request.form['etid']:
+            cashier.etid=request.form['etid']
+
+        if  request.form['fname']:
+            cashier.fname=request.form['fname']
+
+        if  request.form['lname']:
+            cashier.lname=request.form['lname']
+
+        if  request.form['stsid']:
+            cashier.stsid=request.form['stsid']
+
+        if  request.form['salary']:
+            cashier.salary=request.form['salary']
+        print("submit")
+        session.add(cashier)
+        session.commit()
+        return redirect(url_for('showCashiers'))
+    if request.method == 'POST' and request.form['submit_button'] == 'delete':
+        session.delete(cashier)
+        session.commit()
+        return redirect(url_for('showCashiers'))
+    else:
+
+        return render_template('editCashiers.html',
+                               cashier=cashier)
+
+
+@app.route('/Cashiers/addCashier', methods=['GET', 'POST'])
+def addCashier():
+
+    if request.method == 'POST':
+
+        if not request.form['eid']:
+            flash('Please enter employee id')
+            return redirect(url_for('addCashier'))
+
+        if not request.form['fname']:
+            flash('Please enter first name')
+            return redirect(url_for('addCashier'))
+
+        if not request.form['lname']:
+            flash('Please enter last name')
+            return redirect(url_for('addCashier'))
+        if not request.form['stsid']:
+            flash('Please enter status id')
+            return redirect(url_for('addCashier'))
+        if not request.form['salary']:
+            flash('Please enter salary')
+            return redirect(url_for('addCashier'))
+        # Add new item
+        cashier = Employee(eid=request.form['eid'],
+                                    etid='ET2',
+                                     fname=request.form['fname'],
+                                    lname=request.form['lname'],
+                                    stsid=request.form['stsid'],
+                                    salary=request.form['salary'])
+        session.add(cashier)
+        session.commit()
+
+        return redirect(url_for('showCashiers'))
+    else:
+        # Get all categories
+        return render_template('addCashier.html')
+
+
+@app.route('/RestaurantMenu')
+def showRestaurantMenu():
+    statusTypes=session.query(StatusType).all()
+    statuses=   session.query(Status).all()
+    foodCategories=session.query(FoodCategory).all()
+    foodItems     =session.query(FoodItem).all()
+
+    return render_template('restaurantMenu.html',foodCategories=foodCategories,foodItems=foodItems,statuses=statuses,statusTypes=statusTypes)
 
 
 @app.route('/addCategory', methods=['GET', 'POST'])

@@ -39,14 +39,14 @@
           </a>
         </div>
         <ul class="nav">
-          <li class="active ">
+          <li >
             <a href="/dashboard">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li>
-            <a href="{{url_for('showRestaurantMenu') }}">
+          <li class="active ">
+            <a href="/RestaurantMenu">
               <i class="tim-icons icon-map-big
 
 "></i>
@@ -148,8 +148,205 @@
       <!-- End Navbar -->
       <div class="content">
         <div class="card ">
+          <div class="card-header">
+            <h4 class="card-title">Food Categories</h4>
+          </div>
           <div class="card-body">
+            <div class="column">
+              <div class="col-3">
+                  
+                <div class="list-group row">
+                  {% for category in foodCategories %}
+                  <a class="list-group-item list-group-item-action list-group-item-light text-center" style="width:750px" href="{{url_for('editFoodCategory',cfid=category.cfid)}}">
+                      {{category.name}} - {{category.cfid}} - {{category.stsid}} - {{category.description}}
+                  </a>
+                  {% endfor %}
+              </div>
+              </div>
+          <div class="card-footer">
+              <a href="/addCategory">
+            <button type="submit" class="btn btn-fill btn-primary">Add Category</button>
+            </a>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="content">
+          <div class="card ">
+            <div class="card-header">
+              <h4 class="card-title">Food Items</h4>
             </div>
+            <div class="card-body">
+              <div class="column">
+                <div class="col-3">
+                    
+                  <div class="list-group row">
+                    {% for item in foodItems %}
+                    <a class="nav-item list-group-item list-group-item-action list-group-item-light text-center" style="width:750px" href="{{url_for('editFoodItem',fooditem_id=item.fid)}}">
+                 {{item.fid}} - {{item.name}} - {{item.cfid}} - {{item.price}} - {{item.description}} - {{item.stsid}}
+                        </a>
+                    {% endfor %}
+                      </div>
+                </div>
+            <div class="card-footer">
+                <a href="/addFoodItem">
+              <button type="submit" class="btn btn-fill btn-primary">Add Food Item</button>
+              </a>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="card ">
+            <div class="card-header">
+              <h4 class="card-title">Status</h4>
+            </div>
+            <div class="card-body">
+              <div class="column">
+                <div class="col-3">
+                    
+                  <div class="list-group row">
+                    {% for status in statuses %}
+                    <a class="list-group-item list-group-item-action list-group-item-light text-center" style="width:750px" href="{{url_for('editStatus',stsid=status.stsid)}}" >
+                        {{status.stsid}} - {{status.ststid}} - {{status.name}} - {{status.description}}
+                    </a>
+                    {% endfor %}
+                </div>
+                </div>
+            <div class="card-footer">
+                <a href="{{url_for('addStatus')}}">
+              <button type="submit" class="btn btn-fill btn-primary">Add Status</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="card ">
+            <div class="card-header">
+              <h4 class="card-title">Status Type</h4>
+            </div>
+            <div class="card-body">
+              <div class="column">
+                <div class="col-3">
+                    
+                  <div class="list-group row">
+                    {% for status in statusTypes %}
+                    <a class="list-group-item list-group-item-action list-group-item-light text-center" style="width:750px" href="{{url_for('editStatusType',ststid=status.ststid)}}">
+                        {{status.ststid}} - {{status.description}} - {{status.entity}} 
+                    </a>
+                    {% endfor %}
+                </div>
+                </div>
+            <div class="card-footer">
+                <a href="{{url_for('addStatusType')}}">
+              <button type="submit" class="btn btn-fill btn-primary">Add Status Type</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="card ">
+              <div class="card-header">
+                <h4 class="card-title">Food Items</h4>
+              </div>
+              <div class="card-body">
+                  <div class="table-responsive ps">
+                    <table class="table tablesorter " id="">
+                      <thead class=" text-primary">
+                        <tr>
+                          <th>
+                            ID
+                          </th>
+                          <th>
+                            Name
+                          </th>
+                          <th>
+                            Category
+                          </th>
+                          <th>
+                            Description
+                          </th>
+       <th>
+                            Status
+                          </th>
+  
+                          <th class="text-center">
+                            Price
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            01
+                          </td>
+                          <td>
+                            Donkey
+                          </td>
+                          <td>
+                            Saudi Arabian
+                          </td>
+                          <td>
+                            Fresh Donkey
+                          </td>
+                              <td>
+                            Available
+                          </td>
+      
+                          <td class="text-center">
+                            $2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            02
+                          </td>
+                          <td>
+                            Goat
+                          </td>
+                          <td>
+                            Saudi Arabian
+                          </td>
+                          <td>
+                            Fresh Goat
+                          </td>
+                          <td>
+                              Not Available
+                            </td>
+                          <td class="text-center">
+                            $2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            03
+                          </td>
+                          <td>
+                            Camel
+                          </td>
+                          <td>
+                            Saudi Arabian
+                          </td>
+                          <td>
+                            Fresh Camel
+                          </td>
+                          <td>
+                              Dog ate Stock
+                            </td>
+                          <td class="text-center">
+                            $2
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+                </div>
+              <div class="card-footer">
+                  <a href="./addItem.html">
+                <button type="submit" class="btn btn-fill btn-primary">Add Item</button>
+                </a>
+              </div>
             </div>
           </div>
   <!--   Core JS Files   -->

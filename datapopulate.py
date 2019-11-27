@@ -84,5 +84,13 @@ session.add(foodit13)
 session.add(foodit14)
 
         
+etype1=EmployeeType(etid='ET1',name='ADMIN',description='ADMIN')
+etype2=EmployeeType(etid='ET2',name='CASHIER',description='CASHIER')
+
+session.add(etype1)
+session.add(etype2)
+        
+employee1=Employee(eid='E1',etid='ET2',fname='Sultan',lname='Lubbad',stsid='S1',salary=1000.5)
+session.add(employee1)
 session.commit()
 

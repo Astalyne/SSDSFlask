@@ -57,7 +57,7 @@ class FoodCategory(Base):
 
 class EmployeeType(Base):
     __tablename__='employeetype'
-    etid=Column(Integer,nullable=False, primary_key=True)
+    etid=Column(String(10),nullable=False, primary_key=True)
     name = Column(String(80), nullable=False)
     description=Column(String(225))
     # @property
@@ -65,12 +65,12 @@ class EmployeeType(Base):
     #     return{'id':self.id,'name':self.name,}
 class Employee(Base):
     __tablename__='employee'
-    eid=Column(Integer,nullable=False, primary_key=True)
-    etid=Column(Integer, ForeignKey("employeetype.etid"),nullable=False)
+    eid=Column(String(10),nullable=False, primary_key=True)
+    etid=Column(String(10), ForeignKey("employeetype.etid"),nullable=False)
     fname = Column(String(80), nullable=False)
     lname = Column(String(80), nullable=False)
     stsid=Column(String(10), ForeignKey("status.stsid"),nullable=False)
-    price=Column(DECIMAL(5,2))
+    salary=Column(DECIMAL(5,2))
     # @property
     # def serialize(self):
     #     return{'id':self.id,'name':self.name,}

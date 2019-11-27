@@ -53,10 +53,10 @@
               </a>
             </li>
             <li>
-              <a href="/Cashiers">
-                <i class="tim-icons icon-pin"></i>
-                <p>Restuarant Cashiers</p>
-              </a>
+                <a href="/Cashiers">
+                  <i class="tim-icons icon-pin"></i>
+                  <p>Restuarant Cashiers</p>
+                </a>
             </li>
             <li>
               <a href="./user.html">
@@ -80,7 +80,7 @@
                   <span class="navbar-toggler-bar bar3"></span>
                 </button>
               </div>
-              <a class="navbar-brand" href="javascript:void(0)">Add Category</a>
+              <a class="navbar-brand" href="javascript:void(0)">Edit Cashier</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -148,27 +148,33 @@
         <div class="content">
         <div class="card">
           <div class ="card-body">
-              {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
-              <p class="alert alert-danger" role="alert">{{ message }}</p>
-              {% endfor %} {% endif %} {% endwith %}
             <form action="#" method="post">
                 <div class="form-group">
-                    <label for="InputCategoryName">Category Name</label>
-                    <input type="Name" class="form-control" name="InputCategoryName"  placeholder="Enter Name">
+                    <label for="eid">Employee ID</label>
+                    <input type="eid" class="form-control" name="eid"  value="{{cashier.eid}}">
                   </div>
                   <div class="form-group">
-                      <label for="InputCategoryDesc">Category Description</label>
-                      <input style="height:50px;" type="Description" class="form-control" name="InputCategoryDesc"  placeholder="Enter Description">
+                      <label for="etid">Employee Type ID</label>
+                      <input style="height:50px;" type="etid" class="form-control" name="etid"  value="{{cashier.etid}}">
                     </div>
                     <div class="form-group">
-                      <label for="InputCategoryName">Category ID</label>
-                      <input type="ID" class="form-control" name="InputCategoryID"  placeholder="Enter ID">
+                      <label for="fname">First Name</label>
+                      <input style="height:50px"  class="form-control" name="fname" value="{{cashier.fname}}"">
                     </div>
                     <div class="form-group">
-                      <label for="InputCategoryName">Status ID</label>
-                      <input type="stsid" class="form-control" name="InputCategoryStatus"  placeholder="Enter STID">
+                        <label for="lname">Last Name</label>
+                        <input style="height:50px"  class="form-control" name="lname" value="{{cashier.lname}}"">
+                      </div>
+                      <div class="form-group">
+                          <label for="stsid">Status ID</label>
+                        <input type="stsid" class="form-control" name="stsid"  value="{{cashier.stsid}}">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-group">
+                        <label for="salary">Salary</label>
+                      <input type="salary" class="form-control" name="salary"  value="{{cashier.salary}}">
+                  </div>
+                    <button type="submit" name ="submit_button" value ="submit"class="btn btn-primary">Submit</button>
+                    <button type="submit" name ="submit_button" value= "delete"class="btn btn-primary">Delete</button>
 
             </form>
           </div>

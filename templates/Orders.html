@@ -37,32 +37,26 @@
           </a>
         </div>
         <ul class="nav">
-          <li >
+          <li class="active ">
             <a href="./dashboard.html">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="active ">
-            <a href="./icons.html">
+          <li>
+            <a href="./enter_new_order.html">
               <i class="tim-icons icon-map-big
 
 "></i>
-              <p>Restaurant Menu</p>
+              <p>Enter New Order</p>
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="./Orders.html">
               <i class="tim-icons icon-pin"></i>
-              <p>Restuarant Location</p>
+              <p>Orders</p>
             </a>
-          </li>
-          <li>
-            <a href="./user.html">
-              <i class="tim-icons icon-single-02"></i>
-              <p>Restaurant Info</p>
-            </a>
-          </li>     
+          </li>    
          
         </ul>
       <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
@@ -79,7 +73,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+            <a class="navbar-brand" href="javascript:void(0)">ORDERS</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -147,7 +141,7 @@
       <div class="content">
       <div class="card ">
             <div class="card-header">
-              <h4 class="card-title">Restaurant Categories</h4>
+              <h4 class="card-title">Pending Orders</h4>
             </div>
             <div class="card-body">
               <div class="table-responsive ps">
@@ -158,10 +152,16 @@
                         ID
                       </th>
                       <th>
-                        Name
+                        Customer ID
                       </th>
                       <th class="text-center">
-                        Description
+                        Date
+                      </th>
+                      <th class="text-center">
+                        Total Amount
+                      </th>
+                      <th class="text-left">
+                        Status
                       </th>
                     </tr>
                   </thead>
@@ -171,11 +171,22 @@
                         01
                       </td>
                       <td>
-                        African Food
+                        cust001
                       </td>
-                  
                       <td class="text-center">
-                        Oooga booga
+                        2019/09/09
+                      </td>
+                      <td class="text-center">
+                        55 SAR
+                      </td>
+                      <td class="text-left">
+                        <label>
+                        <input type="radio" name="confirm" value="" placeholder="Confirm">Confirm</label>
+                        <br>
+                        <label>
+                        <input type="radio" name="reject" value="" placeholder="Confirm">Reject</label>
+                        <br>
+                        <button type="submit">Submit</button>
                       </td>
                     </tr>
                     <tr>
@@ -183,10 +194,22 @@
                         02
                       </td>
                       <td>
-                        Saudi Food
+                        cust002
                       </td>
                       <td class="text-center">
-                        Allahu Akbar
+                        2019/09/09
+                      </td>
+                      <td class="text-center">
+                        65 SAR
+                      </td>
+                      <td class="text-left">
+                        <label>
+                        <input type="radio" name="confirm" value="" placeholder="Confirm">Confirm</label>
+                        <br>
+                        <label>
+                        <input type="radio" name="reject" value="" placeholder="Confirm">Reject</label>
+                        <br>
+                        <button type="submit">Submit</button>
                       </td>
                     </tr>
                     <tr>
@@ -194,103 +217,34 @@
                         03
                       </td>
                       <td>
-                        Pakistani Food
+                        cust003
                       </td>
                       <td class="text-center">
-                        Need an Uber?
+                        2019/09/09
+                      </td>
+                      <td class="text-center">
+                        55 SAR
+                      </td>
+                      <td class="text-left">
+                        <label>
+                        <input type="radio" name="confirm" value="" placeholder="Confirm">Confirm</label>
+                        <br>
+                        <label>
+                        <input type="radio" name="reject" value="" placeholder="Confirm">Reject</label>
+                        <br>
+                        <button type="submit">Submit</button>
                       </td>
                     </tr>
+                    
                    
                   </tbody>
                 </table>
               <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
             </div>
+            
           </div>
-    <div class="card ">
-              <div class="card-header">
-                <h4 class="card-title">Food Items</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive ps">
-                  <table class="table tablesorter " id="">
-                    <thead class=" text-primary">
-                      <tr>
-                        <th>
-                          ID
-                        </th>
-                        <th>
-                          Name
-                        </th>
-                        <th>
-                          Category
-                        </th>
-                        <th>
-                          Description
-                        </th>
 
-                        <th class="text-center">
-                          Price
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          01
-                        </td>
-                        <td>
-                          Donkey
-                        </td>
-                        <td>
-                          Saudi Arabian
-                        </td>
-                        <td>
-                          Fresh Donkey
-                        </td>
-                        <td class="text-center">
-                          $2
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          02
-                        </td>
-                        <td>
-                          Goat
-                        </td>
-                        <td>
-                          Saudi Arabian
-                        </td>
-                        <td>
-                          Fresh Goat
-                        </td>
-                        <td class="text-center">
-                          $2
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          03
-                        </td>
-                        <td>
-                          Camel
-                        </td>
-                        <td>
-                          Saudi Arabian
-                        </td>
-                        <td>
-                          Fresh Camel
-                        </td>
-                        <td class="text-center">
-                          $2
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
-              </div>
-            </div>
-  </div>
+    
   <!--   Core JS Files   -->
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
