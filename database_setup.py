@@ -41,9 +41,9 @@ class FoodItem(Base):
     stsid=Column(String(10),ForeignKey("status.stsid"),nullable=False)
     description=Column(String(225))
 
-    # @property
-    # def serialize(self):
-    #     return{'id':self.id,'name':self.name,}
+    @property
+    def serialize(self):
+        return{'fid':self.fid,'name':self.name,'cfid':self.cfid,'price':self.price,'stsid':self.stsid,'description':self.description}
 class FoodCategory(Base):
     __tablename__='foodcategory'
     cfid=Column(String(50),nullable=False, primary_key=True)
@@ -89,7 +89,7 @@ class Transaction(Base):
 class CustomerOrder(Base):
     __tablename__='customer_order'
     tid=Column(Integer,nullable=False,primary_key=True)
-    eid=Column(Integer, ForeignKey("employee.eid"),nullable=False)
+    fid=Column(Integer, ForeignKey("fooditem.fid"),nullable=False)
     qty=Column(Integer,nullable=False)
     amt=Column(Integer,nullable=False)
     stsid=Column(String(10), ForeignKey("status.stsid"),nullable=False)

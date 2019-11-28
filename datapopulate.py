@@ -30,7 +30,7 @@ session.add(statustype6)
 session.add(statustype7)
 session.add(statustype8)
 
-status1 = Status(stsid='S1',ststid='ST1',name='dataname',description='')
+status1 = Status(stsid='S1',ststid='ST1',name='Available',description='')
 session.add(status1)
 
 foodcat1=FoodCategory(cfid='FC1',name='DRINKS',description='FRESH JUICES, HOT & COLD BEVERAGES',stsid='S1')

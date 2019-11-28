@@ -1,7 +1,7 @@
 import os
 from flask import Flask, url_for, redirect, send_from_directory
 from flask import render_template, flash, request, jsonify
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine,desc
 import datetime
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base,Status,StatusType,FoodCategory,FoodCategoryHistory,FoodItem,Employee,EmployeeType,Transaction,CustomerOrder  
@@ -24,14 +24,9 @@ session = DBSession()
 
 
 @app.route('/dashboard')
-@app.route('/')
 def showDashboard():
-    statusTypes=session.query(StatusType).all()
-    statuses=   session.query(Status).all()
-    foodCategories=session.query(FoodCategory).all()
-    foodItems     =session.query(FoodItem).all()
-
-    return render_template('dashboard.html',foodCategories=foodCategories,foodItems=foodItems,statuses=statuses,statusTypes=statusTypes)
+    
+    return render_template('dashboard.html')
 
 @app.route('/Cashiers')
 def showCashiers():
@@ -143,7 +138,6 @@ def addCategory():
         if not request.form['InputCategoryStatus']:
             flash('Please enter category status ID')
             return redirect(url_for('addCategory'))
-
         # Add new item
         newCategory = FoodCategory(cfid=request.form['InputCategoryID'],
                                     name=request.form['InputCategoryName'],
@@ -324,7 +318,6 @@ def addStatusType():
             flash('Please enter entity name')
             return redirect(url_for('addStatusType'))
 
-
         newStatusType = StatusType(ststid=request.form['ststid'],
                                     entity=request.form['entity'],
                                     description=request.form['description'])
@@ -398,6 +391,60 @@ def editStatusType(ststid):
         return render_template('editStatusType.html',
                                statusType=statusType)
 
+@app.route('/cashier/newOrder',methods=['GET','POST'])
+def newOrder():
+    foodcategories=session.query(FoodCategory).all()
+    if request.method =='POST':
+        maxTID = session.query(Transaction).order_by(
+        desc(Transaction.tid)).limit(1).first()
+        
+        if(maxTID==None):
+            max=0
+        else:
+            max=maxTID.tid
+        transaction = Transaction(tid=max+1,eid="E2",date=datetime.datetime.today(),totalamt=float(request.form['total']),stsid="S1")
+        session.add(transaction)
+
+        fid=session.query(FoodItem).filter_by(name=request.form['food']).first()
+        customerorder=CustomerOrder(tid=max+1,fid=fid.fid,qty=request.form['quantity'],amt=float(request.form['total']),stsid="S1")
+        session.add(customerorder)
+        session.commit()
+        return render_template("new_order.html",foodcategories=foodcategories)
+    else: 
+        customerOrders=session.query(CustomerOrder).all()
+        print(customerOrders)
+        return render_template('new_order.html',foodcategories=foodcategories,customerOrders=customerOrders)
+
+@app.route('/_get_data/', methods=['POST'])
+def _get_data():
+    cfid=request.form['cfid']
+    fooditems = session.query(FoodItem).filter_by(cfid=cfid).all()
+    myList =[]
+    for item in fooditems:
+        myList.append(item.name)
+    return jsonify(myList)
+
+@app.route('/_get_price/', methods=['POST'])
+def _get_price():
+    namee=request.form['name']
+    quantity=request.form['quantity']
+    allfood = session.query(FoodItem).all()
+    price=0
+    for item in allfood:
+        if item.name.strip()==namee.strip():
+            price=item.price
+    qu=int(quantity.strip())
+    total=price*qu
+    return (str(total))
+
+@app.route('/_get_status/', methods=['POST'])
+def _get_status():
+    namee=request.form['name']
+    fooditem=session.query(FoodItem).filter_by(name=namee.strip()).first()
+    status=fooditem.stsid
+    statusname=session.query(Status).filter_by(stsid=status.strip()).first()
+    stname=statusname.name
+    return (stname)
 
 
 if __name__ == '__main__':
