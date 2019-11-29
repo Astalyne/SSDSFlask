@@ -39,21 +39,21 @@
           </a>
         </div>
         <ul class="nav">
-            <li class="">
-              <a href="/dashboard.html">
+            <li >
+              <a href="">
                 <i class="tim-icons icon-chart-pie-36"></i>
                 <p>Dashboard</p>
               </a>
             </li>
-            <li class="active">
-                <a href="/cashier/newOrder">
-                  <i class="tim-icons icon-map-big
+            <li >
+              <a href="/cashier/newOrder">
+                <i class="tim-icons icon-map-big
   
   "></i>
                 <p>Enter New Order</p>
               </a>
             </li>
-            <li>
+            <li class="active">
               <a href="/cashier/orderList">
               <i class="tim-icons icon-pin"></i>
               <p>Orders</p>
@@ -75,7 +75,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+            <a class="navbar-brand" href="javascript:void(0)">Order List</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -143,58 +143,17 @@
       <div class="content">
           <div class="card">
               <div class="card-body">
-                <form>
-                  <div class="row">
-                    <div class="col">
-                      <div id="cfid" class="form-group">
-                          <label id="cfid" for="InputCategory">Category</label>
-                          <select class="form-control" id="cfid">
-                            <option>Choose Food Category</option>
-                              {% for category in foodcategories %}
-                              <option value="{{category.cfid}}">{{category.cfid}} .{{category.name}}</option>
-                              {% endfor %}
-                          </select>                   
-                      </div>
-                    </div>
+                  <div class="column">
+                      <div class="col-3">
+                          
+                        <div class="list-group row">
+                          {% for order in customerOrders %}
+                          <div class="list-group-item list-group-item-action list-group-item-light text-center" style="width:750px padding-right:20px">
+                              Food Id: {{order.fid}} - Quantity: {{order.qty}} - Amount: {{order.amt}}$ <a style="padding-right:10px" href="">Accept</a>  <a href="">Reject</a>  </div>
 
-                    <div class="col">
-                    <div class="form-group">
-                        <label for="food">Food Item Name</label>
-                        <select class="form-control" type="name" name ='food' id="food">
-                            <option>Choose Food</option>
-                            </select> 
+                          {% endfor %}
                       </div>
-                    </div>
-                  
-                  </div>
-                  <div class="row">
-                                
-                        <div class="col">
-                          <div class="form-group">
-                              <label for="ItemCategory">Quantity</label>
-                              <input id="quantity" type="quantity" name='quantity' class="form-control"  value="1" >
-
-                            </div>
-                          </div>
-                          <div class="col">
-                          <div class="form-group">
-                              <label for="ItemCategory">Status</label>
-                              <input type="Status" class="form-control" id="status" placeholder="" readonly>
-
-                            </div>
-                          </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group">
-                        <label for="ItemCategory">Total</label>
-                        <input type="total" class="form-control" name='total' id="total" placeholder="$$" readonly >
                       </div>
-                    </div>
-                  </div>
-                  <button type="submit" formmethod="post" class="btn btn-primary">Add</button>
-    
-                </form>
               </div>
             </div>
           </div>

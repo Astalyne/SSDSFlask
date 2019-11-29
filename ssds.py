@@ -415,6 +415,15 @@ def newOrder():
         print(customerOrders)
         return render_template('new_order.html',foodcategories=foodcategories,customerOrders=customerOrders)
 
+@app.route('/cashier/orderList',methods=['GET','POST'])
+def orderlist():
+    orders=session.query(CustomerOrder).all()
+
+
+    return render_template('orderList.html',customerOrders=orders)
+
+
+
 @app.route('/_get_data/', methods=['POST'])
 def _get_data():
     cfid=request.form['cfid']
