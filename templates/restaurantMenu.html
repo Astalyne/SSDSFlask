@@ -155,7 +155,7 @@
             <div class="column">
               <div class="col-3">
                   
-                <div class="list-group row">
+                <div class="list-group row" name='listiwant'>
                   {% for category in foodCategories %}
                   <a class="list-group-item list-group-item-action list-group-item-light text-center" style="width:750px" href="{{url_for('editFoodCategory',cfid=category.cfid)}}">
                       {{category.name}} - {{category.cfid}} - {{category.stsid}} - {{category.description}}

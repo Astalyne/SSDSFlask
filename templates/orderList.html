@@ -148,8 +148,14 @@
                           
                         <div class="list-group row">
                           {% for order in customerOrders %}
-                          <div class="list-group-item list-group-item-action list-group-item-light text-center" style="width:750px padding-right:20px">
-                              Food Id: {{order.fid}} - Quantity: {{order.qty}} - Amount: {{order.amt}}$ <a style="padding-right:10px" href="">Accept</a>  <a href="">Reject</a>  </div>
+                          <div class="list-group-item list-group-item-action list-group-item-light text-center" style="width:1000px padding-right:20px">
+                              Food Id: {{order.fid}} - Quantity: {{order.qty}} - Amount: {{order.amt}}$ - Status: {{order.stsid}} 
+                              <br>
+                              <a style="padding-right:10px" href="{{url_for('acceptOrder',tid=order.tid)}}" name ="order" value="accept" formmethod="post">Accept</a> 
+                               <a style="padding-right:10px" href="{{url_for('rejectOrder',tid= order.tid)}}" name ="order" value="reject" formmethod="post">Reject</a>  
+                               <a style="padding-right:10px" href="{{url_for('deliveryOrder',tid= order.tid)}}" name ="order" value="delivery" formmethod="post">Delivery</a>  
+                               <a style="padding-right:10px" href="{{url_for('deliveredOrder',tid= order.tid)}}" name ="order" value="delivered" formmethod="post">Delivered</a>
+                                </div>
 
                           {% endfor %}
                       </div>

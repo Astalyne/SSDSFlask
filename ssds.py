@@ -25,8 +25,11 @@ session = DBSession()
 
 @app.route('/dashboard')
 def showDashboard():
-    
     return render_template('dashboard.html')
+
+@app.route('/dashboard/<string:fro>/<string:to>')
+def showData(fro,to):
+    return render_template('data.html')
 
 @app.route('/Cashiers')
 def showCashiers():
@@ -237,7 +240,7 @@ def editFoodItem(fooditem_id):
 @app.route('/foodCategory/<string:cfid>',
            methods=['GET', 'POST'])
 def editFoodCategory(cfid):
- 
+
     # Get all categories
     foodCategory = session.query(FoodCategory).filter_by(cfid=cfid).first()
 
@@ -271,7 +274,7 @@ def editFoodCategory(cfid):
 def addStatus():
     
     if request.method == 'POST':
-
+        
         if not request.form['stsid']:
             flash('Please enter status id')
             return redirect(url_for('addStatus'))
@@ -402,11 +405,11 @@ def newOrder():
             max=0
         else:
             max=maxTID.tid
-        transaction = Transaction(tid=max+1,eid="E2",date=datetime.datetime.today(),totalamt=float(request.form['total']),stsid="S1")
+        transaction = Transaction(tid=max+1,eid="E2",date=datetime.datetime.today(),totalamt=float(request.form['total']),stsid="S8")
         session.add(transaction)
-
+        print(request.form['food'])
         fid=session.query(FoodItem).filter_by(name=request.form['food']).first()
-        customerorder=CustomerOrder(tid=max+1,fid=fid.fid,qty=request.form['quantity'],amt=float(request.form['total']),stsid="S1")
+        customerorder=CustomerOrder(tid=max+1,fid=fid.fid,qty=request.form['quantity'],amt=float(request.form['total']),stsid="S9")
         session.add(customerorder)
         session.commit()
         return render_template("new_order.html",foodcategories=foodcategories)
@@ -415,13 +418,73 @@ def newOrder():
         print(customerOrders)
         return render_template('new_order.html',foodcategories=foodcategories,customerOrders=customerOrders)
 
-@app.route('/cashier/orderList',methods=['GET','POST'])
+@app.route('/cashier/orderList',methods=['GET'])
 def orderlist():
     orders=session.query(CustomerOrder).all()
 
+    # if request.method=='POST':
+        
+    #     print(request.form['order'])
+    #     return render_template('orderList.html',customerOrders=orders)
+
+    # if request.method=='POST' and request.form['order']=='reject':
+    #     return render_template('orderList.html',customerOrders=orders)
+
+    # else:
+    return render_template('orderList.html',customerOrders=orders)
+        
+@app.route('/cashier/orderList/acceptOrder/<string:tid>',methods=['GET','POST'])
+def acceptOrder(tid):
+    transaction=session.query(Transaction).filter_by(tid=tid).first()
+
+    customerorder=session.query(CustomerOrder).filter_by(tid=tid).first()
+    transaction.stsid="S7"
+    customerorder.stsid="S10"
+    session.add(transaction)
+    session.add(customerorder)
+    session.commit()
+    orders=session.query(CustomerOrder).all()
+
+    return render_template('orderList.html',customerOrders=orders)
+    
+@app.route('/cashier/orderList/rejectOrder/<string:tid>',methods=['GET','POST'])
+def rejectOrder(tid):
+    customerorder=session.query(CustomerOrder).filter_by(tid=tid).first()
+    customerorder.stsid="S11"
+    session.add(customerorder)
+    session.commit()
+
+    orders=session.query(CustomerOrder).all()
 
     return render_template('orderList.html',customerOrders=orders)
 
+@app.route('/cashier/orderList/deliveryOrder/<string:tid>',methods=['GET','POST'])
+def deliveryOrder(tid):
+    transaction=session.query(Transaction).filter_by(tid=tid).first()
+    customerorder=session.query(CustomerOrder).filter_by(tid=tid).first()
+    transaction.stsid="S7"
+    customerorder.stsid="S12"
+    session.add(customerorder)
+    session.add(transaction)
+
+    session.commit()
+    orders=session.query(CustomerOrder).all()
+
+    return render_template('orderList.html',customerOrders=orders)
+
+@app.route('/cashier/orderList/deliveredOrder/<string:tid>',methods=['GET','POST'])
+def deliveredOrder(tid):
+    transaction=session.query(Transaction).filter_by(tid=tid).first()
+    customerorder=session.query(CustomerOrder).filter_by(tid=tid).first()
+    transaction.stsid="S7"
+    customerorder.stsid="S13"
+    session.add(customerorder)
+    session.add(transaction)
+
+    session.commit()
+    orders=session.query(CustomerOrder).all()
+
+    return render_template('orderList.html',customerOrders=orders)
 
 
 @app.route('/_get_data/', methods=['POST'])
