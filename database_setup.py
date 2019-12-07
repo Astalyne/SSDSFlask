@@ -9,6 +9,18 @@ from sqlalchemy import create_engine
 Base= declarative_base()
 
 
+class Admin(Base):
+    __tablename__ = "admins"
+    id = Column(Integer, primary_key=True)
+    username = Column(String(10))
+    password = Column(String(10))
+
+class Cashier(Base):
+    __tablename__ = "cashiers"
+    id = Column(Integer, primary_key=True)
+    username = Column(String(10))
+    password = Column(String(10))
+
 class StatusType(Base):
     __tablename__= 'statustype'
     ststid=Column(String(10), primary_key=True,nullable=False)
@@ -76,7 +88,7 @@ class Employee(Base):
     #     return{'id':self.id,'name':self.name,}
 
 class Transaction(Base):
-    __tablename__='transaction'
+    __tablename__='transactions'
     tid=Column(Integer,nullable=False, primary_key=True)
     eid=Column(Integer, ForeignKey("employee.eid"),nullable=False)
     date=Column(Date,nullable=False)

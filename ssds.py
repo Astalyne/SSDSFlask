@@ -1,12 +1,13 @@
 import os
 from flask import Flask, url_for, redirect, send_from_directory
 from flask import render_template, flash, request, jsonify
-from sqlalchemy import create_engine,desc
+from sqlalchemy import create_engine,desc,text,func
 import datetime
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base,Status,StatusType,FoodCategory,FoodCategoryHistory,FoodItem,Employee,EmployeeType,Transaction,CustomerOrder  
+from database_setup import Base, Cashier,Admin,Status,StatusType,FoodCategory,FoodCategoryHistory,FoodItem,Employee,EmployeeType,Transaction,CustomerOrder  
 import random
 import string
+import pandas as pd
 from flask import session as login_session
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
@@ -22,14 +23,62 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+@app.route('/')
+def home():
+    if not login_session.get('logged_in'):
+        return render_template('index.html')
+    else:
+        return render_template('index.html')
 
-@app.route('/dashboard')
+@app.route('/login',methods=['GET','POST'])
+def logIn():
+    if request.method=='POST':
+        POST_USERNAME = str(request.form['username'])
+        POST_PASSWORD = str(request.form['password'])
+        print(POST_PASSWORD)
+        query = session.query(Admin).filter(Admin.username.in_([POST_USERNAME]), Admin.password.in_([POST_PASSWORD]) )
+        admin = query.first()
+        query2 = session.query(Cashier).filter(Cashier.username.in_([POST_USERNAME]), Cashier.password.in_([POST_PASSWORD]) )
+        cashier = query2.first()
+        
+        if admin:
+            login_session['logged_in']= True
+            return render_template('dashboard.html')
+        if cashier:
+            login_session['logged_in']= True
+            return render_template('orderList.html')
+        else:
+            return render_template('index.html')
+    else:
+        return render_template('index.html')
+    # if result:
+    # session['logged_in'] = True
+    # else:
+    # flash('wrong password!')
+
+@app.route('/dashboard',methods=['POST','GET'])
 def showDashboard():
-    return render_template('dashboard.html')
+    if request.method=='POST':
+        fro=request.form['fro']
+        to=request.form['to']
+        return showData(fro,to)
+    else:
+        return render_template('dashboard.html')
 
 @app.route('/dashboard/<string:fro>/<string:to>')
 def showData(fro,to):
-    return render_template('data.html')
+    # sql=text('SELECT cust.fid, sum(cust.amt) AS tprice FROM customer_order AS cust JOIN transactions AS trans ON cust.tid = trans.tid WHERE trans.date BETWEEN 2019-12-04 AND 2019-12-06 GROUP BY cust.fid')
+    foodItemData=session.query(CustomerOrder.fid,func.sum(CustomerOrder.amt)).join(Transaction,CustomerOrder.tid==Transaction.tid).filter(Transaction.date>= fro).filter(Transaction.date<=to).group_by(CustomerOrder.fid)
+    foodlist=[]
+
+    for item in foodItemData:
+        listoflist=[]
+        for l in item:
+            listoflist.append(l)
+        name=session.query(FoodItem.name).filter_by(fid=item[0]).first()
+        listoflist.append(name[0])
+        foodlist.append(listoflist)
+    return render_template('data.html',foodlist=foodlist)
 
 @app.route('/Cashiers')
 def showCashiers():
@@ -103,6 +152,8 @@ def addCashier():
                                     stsid=request.form['stsid'],
                                     salary=request.form['salary'])
         session.add(cashier)
+        user = Cashier(username=request.form['username'],password=request.form['password'])
+        session.add(user)
         session.commit()
 
         return redirect(url_for('showCashiers'))
@@ -117,7 +168,7 @@ def showRestaurantMenu():
     statuses=   session.query(Status).all()
     foodCategories=session.query(FoodCategory).all()
     foodItems     =session.query(FoodItem).all()
-
+    
     return render_template('restaurantMenu.html',foodCategories=foodCategories,foodItems=foodItems,statuses=statuses,statusTypes=statusTypes)
 
 
@@ -149,7 +200,7 @@ def addCategory():
         session.add(newCategory)
         session.commit()
 
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
     else:
         # Get all categories
 
@@ -192,7 +243,7 @@ def addFoodItem():
         session.add(newFoodItem)
         session.commit()
 
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
     else:
         # Get all categories
         foodcategories = session.query(FoodCategory).all()
@@ -225,12 +276,12 @@ def editFoodItem(fooditem_id):
             foodItem.stsid=request.form['stsid']
         session.add(foodItem)
         session.commit()
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
 
     if request.method == 'POST' and request.form['submit_button'] == 'delete':
         session.delete(foodItem)
         session.commit()
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
 
     else:
 
@@ -259,11 +310,11 @@ def editFoodCategory(cfid):
 
         session.add(foodCategory)
         session.commit()
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
     if request.method == 'POST' and request.form['submit_button'] == 'delete':
         session.delete(foodCategory)
         session.commit()
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
 
     else:
 
@@ -298,7 +349,7 @@ def addStatus():
         session.add(newStatus)
         session.commit()
 
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
     else:
         # Get all status types
         statusTypes=session.query(StatusType).all()
@@ -327,7 +378,7 @@ def addStatusType():
         session.add(newStatusType)
         session.commit()
 
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
     else:
         # Get all status types
         return render_template('addStatusType.html')
@@ -352,11 +403,11 @@ def editStatus(stsid):
             status.description=request.form['description']
         session.add(status)
         session.commit()
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
     if request.method == 'POST' and request.form['submit_button'] == 'delete':
         session.delete(status)
         session.commit()
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
 
 
     else:
@@ -382,12 +433,12 @@ def editStatusType(ststid):
 
         session.add(statusType)
         session.commit()
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
 
     if request.method == 'POST' and request.form['submit_button'] == 'delete':
         session.delete(statusType)
         session.commit()
-        return redirect(url_for('showDashboard'))
+        return redirect(url_for('showRestaurantMenu'))
 
     else:
 

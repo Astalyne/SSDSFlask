@@ -39,12 +39,7 @@
           </a>
         </div>
         <ul class="nav">
-            <li >
-              <a href="">
-                <i class="tim-icons icon-chart-pie-36"></i>
-                <p>Dashboard</p>
-              </a>
-            </li>
+
             <li >
               <a href="/cashier/newOrder">
                 <i class="tim-icons icon-map-big
@@ -84,27 +79,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto">
-              <li class="search-bar input-group">
-                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>
-                  <span class="d-lg-none d-md-block">Search</span>
-                </button>
-              </li>
-              <li class="dropdown nav-item">
-                <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                  <div class="notification d-none d-lg-block d-xl-block"></div>
-                  <i class="tim-icons icon-sound-wave"></i>
-                  <p class="d-lg-none">
-                    Notifications
-                  </p>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                  <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mike John responded to your email</a></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">You have 5 more tasks</a></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Your friend Michael is in town</a></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another notification</a></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another one</a></li>
-                </ul>
-              </li>
+      
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
@@ -116,9 +91,7 @@
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
-                  <li class="dropdown-divider"></li>
+             
                   <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
                 </ul>
               </li>
@@ -149,7 +122,7 @@
                         <div class="list-group row">
                           {% for order in customerOrders %}
                           <div class="list-group-item list-group-item-action list-group-item-light text-center" style="width:1000px padding-right:20px">
-                              Food Id: {{order.fid}} - Quantity: {{order.qty}} - Amount: {{order.amt}}$ - Status: {{order.stsid}} 
+                            Transaction Id: {{order.tid}} -  Food Id: {{order.fid}} - Quantity: {{order.qty}} - Amount: {{order.amt}}$ - Status: {{order.stsid}} 
                               <br>
                               <a style="padding-right:10px" href="{{url_for('acceptOrder',tid=order.tid)}}" name ="order" value="accept" formmethod="post">Accept</a> 
                                <a style="padding-right:10px" href="{{url_for('rejectOrder',tid= order.tid)}}" name ="order" value="reject" formmethod="post">Reject</a>  

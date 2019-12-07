@@ -5,7 +5,7 @@ import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from database_setup import Base, Status,StatusType, FoodCategory,FoodCategoryHistory,FoodItem,Employee,EmployeeType,Transaction,CustomerOrder
+from database_setup import Base, Cashier,Admin, Status,StatusType, FoodCategory,FoodCategoryHistory,FoodItem,Employee,EmployeeType,Transaction,CustomerOrder
 
 engine = create_engine('sqlite:///ssds.db')
 Base.metadata.bind = engine
@@ -214,4 +214,9 @@ session.add(etype2)
 
 employee1=Employee(eid='E1',etid='ET2',fname='Sultan',lname='Lubbad',stsid='S1',salary=1000.5)
 session.add(employee1)
+
+user1= Admin(username="admin",password="admin")
+user2= Cashier(username="cashier",password="cashier")
+session.add(user1)
+session.add(user2)
 session.commit()
