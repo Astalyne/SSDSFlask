@@ -71,14 +71,32 @@ def showData(fro,to):
     foodItemData=session.query(CustomerOrder.fid,func.sum(CustomerOrder.amt)).join(Transaction,CustomerOrder.tid==Transaction.tid).filter(Transaction.date>= fro).filter(Transaction.date<=to).group_by(CustomerOrder.fid)
     foodlist=[]
 
+    categorylist=[]
+    foodcats=session.query(FoodCategory.cfid,FoodCategory.name).all()
+    for cat in foodcats:
+        listoflist=[]
+        for c in cat:
+            listoflist.append(c)
+        listoflist.append(0)
+        categorylist.append(listoflist)
+
     for item in foodItemData:
         listoflist=[]
         for l in item:
             listoflist.append(l)
-        name=session.query(FoodItem.name).filter_by(fid=item[0]).first()
-        listoflist.append(name[0])
+        namencfid=session.query(FoodItem.name,FoodItem.cfid).filter_by(fid=item[0]).first()
+        listoflist.append(namencfid[0])
+        listoflist.append(namencfid[1])
+        listoflist.append(session.query(FoodCategory.name).filter_by(cfid=namencfid[1]).first()[0])
         foodlist.append(listoflist)
-    return render_template('data.html',foodlist=foodlist)
+  
+
+    for category in categorylist:
+        for food in foodlist:
+            if food[3]==category[0]:
+                tot=category[2]
+                category[2]=tot+food[1]
+    return render_template('data.html',foodlist=foodlist,categorylist=categorylist)
 
 @app.route('/Cashiers')
 def showCashiers():
