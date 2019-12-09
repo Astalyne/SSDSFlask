@@ -23,12 +23,74 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+
+
+@app.route('/Shallal')
+def showShallal():
+
+    return render_template('index.html')
+
+        # Getting food order
+@app.route('/ShallalMenu',methods=['GET', 'POST'])
+def customernewOrder():
+    foodcategories = session.query(FoodCategory).all()
+    foodItems      = session.query(FoodItem).all()
+    if request.method == 'POST':
+        if not request.form['firstName']:
+            flash('Please enter your First Name')
+            return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
+
+        if not request.form['lastName']:
+            flash('Please enter last name')
+            return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
+
+        if not request.form['mobileNum']:
+            flash('Please enter mobileNum')
+            return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
+
+        #copied your new order def
+        maxTID = session.query(Transaction).order_by(
+        desc(Transaction.tid)).limit(1).first()
+
+        if(maxTID==None):
+            max=0
+        else:
+            max=maxTID.tid
+        #code that gets foodname and price array. then loops and fills data in customer__order
+        sum=0
+        for x in request.form.getlist('fooditem[]') and y in request.form.getlist('foodPrice[]'):
+            sum= sum+y
+            print(x)
+            fid=session.query(FoodItem).filter_by(name=x).first()
+            customerorder=CustomerOrder(tid=max+1,fid=fid.fid,qty=1,amt=float(y),stsid="S9")
+            session.add(customerorder)
+            session.commit()
+
+        #Then fills transaction table
+        transaction = Transaction(tid=max+1,eid="E2",date=datetime.datetime.today(),totalamt=float(sum),stsid="S8")
+        session.add(transaction)
+
+
+        return redirect(url_for('showOrderRecieved'))
+
+    else:
+    # Get all categories
+
+        return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
+
+@app.route('/orderRecieved')
+def showOrderRecieved():
+
+    return render_template('order_recieved.html')
+
+
+
 @app.route('/')
 def home():
     if not login_session.get('logged_in'):
-        return render_template('index.html')
+        return render_template('login.html')
     else:
-        return render_template('index.html')
+        return render_template('login.html')
 
 @app.route('/login',methods=['GET','POST'])
 def logIn():
@@ -48,9 +110,9 @@ def logIn():
             login_session['logged_in']= True
             return render_template('orderList.html')
         else:
-            return render_template('index.html')
+            return render_template('login.html')
     else:
-        return render_template('index.html')
+        return render_template('login.html')
     # if result:
     # session['logged_in'] = True
     # else:

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Shallalwebdesign</title>
+
+    <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aldrich">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat+Alternates">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="static/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/line-awesome.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="static/assets/css/dh-header-cover-image-button.css">
+    <link rel="stylesheet" href="static/assets/css/dh-row-text-image-right-responsive.css">
+    <link rel="stylesheet" href="static/assets/css/form-component.css">
+    <link rel="stylesheet" href="static/assets/css/Google-Products-Accordion.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="static/static/assets/css/MUSA_panel-table-1.css">
+    <link rel="stylesheet" href="static/assets/css/MUSA_panel-table.css">
+    <link rel="stylesheet" href="static/assets/css/Material-Card.css">
+    <link rel="stylesheet" href="static/assets/css/Pricing-Tables---Bearkov.css">
+    <link rel="stylesheet" href="static/assets/css/Projects-Horizontal.css">
+    <link rel="stylesheet" href="static/assets/css/temp-table.css">
+    <link rel="stylesheet" href="static/assets/css/untitled.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md sticky-top" style="background-color: rgba(225,225,225,0.76);">
+        <div class="container-fluid"><a class="navbar-brand" href="#" style="font-size: 24px;font-family: Aldrich, sans-serif;">Shallal</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse d-md-flex justify-content-md-end" id="navcol-1" style="font-size: 24px;">
+                <ul class="nav navbar-nav d-md-flex justify-content-md-start">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="Shallal">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="ShallalMenu">Menu</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Offers.html">Offers</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="order%20tracking.html">Order Tracking</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#your_Cart"><i class="fas fa-shopping-cart" style="font-size: 25px;"></i></a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <header id='header' class="header" style="margin-top: 0px;  height: 400px;">
+        <div class="header-container" style="background-image:url(&quot;static/assets/img/bgimg3.jpg&quot;);padding-top:100px;padding-bottom:175px;">
+            <div class="container">
+                <div class="col-md-6 offset-md-3 header-title">
+                    <h1 class="text-center" style="color: #ffffff;">Shallal Menu</h1>
+                    <p class="text-center" style="color: rgb(134,139,145);">We serve delicious food items</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container" style="margin-top: 19px;">
+        <ul class="nav nav-tabs food__nav" role="tablist">
+          {% for category in foodcategories %}
+            <li class="nav-item"><a class="nav-link menucat" id="nav-{{category.name}}-tab" href="#nav-{{category.name}}" aria-selected="false" data-toggle="tab" role="tab">{{category.name}}</a></li>
+          {% endfor %}
+        </ul>
+        <div id="nav-tabContent" class="fd__tab__content tab-content" style="margin-bottom: 11px;margin-top: 35px;">
+          {% for category in foodcategories %}
+            <div id="nav-{{category.name}}" class="food__list__tab__content tab-pane fade" role="tabpanel">
+                <div class="row">
+                  {% for item in foodItems %}
+                  {% if category.cfid == item.cfid %}
+                    <div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="static/assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">{{item.name}}</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>{{item.description}}</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">{{item.price}}</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                              <button class="btn btn-light btn-lg" type="button" onclick="addToCart(this)" href='#your_Cart' style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                  <!--for all category-->
+                    {% if category.name == 'ALL' %}
+                    {% for item in foodItems %}
+                      <div class="col card-title col-md-6 col-12">
+                          <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                              <div class="card-image">
+                                  <img class="img-fluid" src="static/assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                  <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">{{item.name}}</span>
+                              </div>
+                              <div class="card-content"
+                                  style="background-color: rgba(9,9,10,0.41);">
+                                  <p>{{item.description}}</p>
+                                  <div class="row">
+                                      <div class="col">
+                                          <p class="priceitem">{{item.price}}</p>
+                                      </div>
+                                      <div class="col">
+                                          <p>SAR</p>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                 <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" href='#your_Cart' style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                              </div>
+                          </div>
+                      </div>
+                        {% endfor %}
+                      {% endif %}
+                  </div>
+              </div>
+            {% endfor %}
+            <!--<div id="nav-cheese" class="food__list__tab__content tab-pane fade" role="tabpanel">
+              <div class="row">
+
+                {% for item in foodItems %}
+
+                  <div class="col card-title col-md-6 col-12">
+                      <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                          <div class="card-image">
+                              <img class="img-fluid" src="static/assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                              <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">{{item.name}}</span>
+                          </div>
+                          <div class="card-content"
+                              style="background-color: rgba(9,9,10,0.41);">
+                              <p>{{item.description}}</p>
+                              <div class="row">
+                                  <div class="col">
+                                      <p class="priceitem">{{item.price}}</p>
+                                  </div>
+                                  <div class="col">
+                                      <p>SAR</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                              <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                          </div>
+                      </div>
+                  </div>
+                  {% endfor %}
+              </div>
+            </div>
+            <div id="nav-zattar" class="food__list__tab__content tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div><div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div><div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-pizza" class="food__list__tab__content tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div><div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-labna" class="food__list__tab__content tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-spinach" class="food__list__tab__content tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div><div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div><div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div><div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-meat" class="food__list__tab__content tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div><div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-falafel" class="food__list__tab__content tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-sweet" class="food__list__tab__content tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col card-title col-md-6 col-12">
+                        <div class="card food-item" style="background-color: rgba(143,47,47,0);">
+                            <div class="card-image">
+                                <img class="img-fluid" src="assets/img/davide-cantelli-jpkfc5_d-DI-unsplash.jpg">
+                                <span class="card-title" style="color: rgb(255,255,255);background-color: #5bc22b;letter-spacing: 2px;font-family: Montserrat, sans-serif;">Food item 1</span>
+                            </div>
+                            <div class="card-content"
+                                style="background-color: rgba(9,9,10,0.41);">
+                                <p>This food item has cheese in it</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="priceitem">12</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>SAR</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action" style="background-color: rgba(21,21,21,0.41);">
+                                <button class="btn btn-light btn-lg" type="button"  onclick="addToCart(this)" style="background-color: rgb(173,13,3);color: rgb(255,255,255); border-color:  rgb(173,13,3);">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      -->  </div>
+    </div>
+    <div class="container" style="margin-top: 33px;">
+        <p><h1 id="your_Cart" style="font-family: Montserrat, sans-serif;font-size: 34px;margin-bottom: 17px;">Your Cart</h1><a href="#top" title=""> back to top</a></p>
+    </div>
+    <div class="container cart-table table table-responsive" style="margin-bottom: 4px;margin-top: -1px;">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="cartItemsBody">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" style="margin: 27px;">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col d-xl-flex justify-content-xl-center align-items-xl-center">
+                        <h2>Total:&nbsp;</h2>
+                    </div>
+                    <div class="col d-lg-flex d-xl-flex justify-content-lg-center align-items-lg-end justify-content-xl-center align-items-xl-center">
+                        <p id='totalprice' style="color: rgb(0,0,0);"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 d-xl-flex justify-content-xl-center align-items-xl-center"><a ><button class="btn btn-danger" type="button" style="font-size: 24px;" onclick="checkout()" >Checkout<br></button></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container checkout-box" style="margin-top: 30px;margin-bottom: 60px;">
+        <div class="row">
+<!-----------------------------CHECKOUT FORM!!!!!------------------------------------------------------>
+<form method='POST'>
+<!-----------------------------user INFORMATION FORM!!!!!------------------------------------------------------>
+            <div class="col-12 col-lg-6" style="margin-top: 10px;">
+              {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+              <p class="alert alert-danger" role="alert">{{ message }}</p>
+              {% endfor %} {% endif %} {% endwith %}
+                <div role="tablist" id="accordion-1">
+                    <div class="card">
+                        <div class="card-header" role="tab">
+                            <h5 class="mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="#accordion-1 .item-1">Customer Information</a></h5>
+                        </div>
+                        <div class="collapse show item-1" role="tabpanel" data-parent="#accordion-1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div style="margin-bottom: 30px;">
+                                            <div class="form-group col-12"><label class="text-uppercase menu-form-label">First Name</label><input class="form-control col-12" type="text" name="firstName" placeholder="FIRST NAME"></div>
+                                            <div class="form-group col-12"><label class="text-uppercase menu-form-label">Last Name</label><input class="form-control col-12" type="text" name="lastName" placeholder="LAST NAME"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" role="tab">
+                            <h5 class="mb-0"><a data-toggle="collapse" aria-expanded="false" aria-controls="accordion-1 .item-2" href="#accordion-1 .item-2">Mobile number</a></h5>
+                        </div>
+                        <div class="collapse item-2" role="tabpanel" data-parent="#accordion-1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div style="margin-bottom: 30px;">
+                                            <div class="form-group col-12"><label class="text-uppercase menu-form-label">Mobile number</label><input class="form-control col-12" name="mobileNum" type="text"></div>
+                                            <div class="form-group col-12"><label class="text-uppercase menu-form-label">email address</label><input class="form-control col-12" name="email" type="text"></div>
+                                        </div style="margin-bottom: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-----------------------------/user INFORMATION FORM!!!!!------------------------------------------------------>
+<!-----------------------------ORDER SUMMARY  FORM!!!!!------------------------------------------------------>
+            <div class="col col-12 col-lg-6" style="margin-top: 10px;">
+                <ul class="list-group item-checkout" name='order_items'>
+                </ul>
+            </div>
+          </form>
+<!-----------------------------/ORDER SUMMARY  FORM!!!!!------------------------------------------------------>
+
+<!-----------------------------/CHECKOUT FORM!!!!!------------------------------------------------------>
+
+        </div>
+    </div>
+
+    <footer class="footer bg-dark" style="color: rgb(255,255,255);">
+        <div class="container">
+            <div class="row footer-row">
+                <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item"><a href="#">About</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Contact</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Terms of &nbsp;Use</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">© Shallal 2019. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/assets/js/bs-init.js"></script>
+    <script src="static/assets/js/actions.js"></script>
+    <script src="static/assets/js/displaymenu.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+    <script src="static/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="static/assets/js/plugins.js"></script>
+    <script src="static/assets/js/popper.min.js"></script>
+    <script src="static/assets/js/addToCart.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+      function placeOrder(){
+        var fooditem = [];
+        var item = [];
+        var foodPrice =[];
+        var Price =[];
+        fooditem = document.getElementsByName('fooditemName');
+        foodPrice = document.getElementsByName('fooditemPrice' );
+        // console.log(fooditem)
+       for (var i=0; i<foodPrice.length ; ++i){ Price[i] = foodPrice[i].innerHTML}
+       for (var i=0; i<fooditem.length ; ++i){ item[i] = fooditem[i].innerHTML}
+        var mobileNum = document.getElementsByName('mobileNum');
+        var firstName = document.getElementsByName('firstName');
+        var lastName = document.getElementsByName('lastName');
+        $.ajax({
+            url: "/ShallalMenu",
+            data: {mobileNum : mobileNum,firstName : firstName, lastName : lastName, fooditem:fooditem, foodPrice:foodPrice},
+            type: "POST",
+            processData: false,
+            dataType: 'json',
+            success: function(data){
+              alert('works')
+              alert(data)
+            }
+        });
+      /*  $.ajax({
+            type: "POST",
+            url: "/ShallalMenu",
+            data: {mobileNum : mobileNum,
+                  firstName : firstName,
+                  lastName : lastName}
+        });*/
+      //  $('#placeOrderBtn').load('/ShallalMenu', {'mobileNum':mobileNum, 'firstName':firstName, 'lastName':lastName});
+    //  $('#placeOrderBtn').load("/ShallalMenu", {'mobileNum':mobileNum, 'firstName':firstName, 'lastName':lastName,'fooditem':'google', 'foodPrice':"foodPrice.google"});
+      }
+    </script>
+</body>
+</html>

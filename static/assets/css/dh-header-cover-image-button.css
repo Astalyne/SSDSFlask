@@ -1,0 +1,97 @@
+.header {
+  width: 100%;
+  margin-top: 97px;
+}
+
+.header-container {
+  background: url(../img/law-bg.jpg) no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding: 50px 0 300px 0;
+  height: auto;
+}
+
+.navbar.navbar-light.navbar-expand-md.bg-light {
+  background-color: #e1e1e1 !important;
+}
+
+.footer-row a {
+  color: white;
+}
+
+.table-heading {
+  font-size: 24px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+img, svg {
+  max-width: 100%;
+}
+
+.cart-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: groove;
+}
+
+.cart-table {
+  border: groove;
+}
+
+#table-header {
+  background-color: rgb(188,188,188);
+}
+
+#order-summary, #place-order {
+  background-color: rgb(42,48,50);
+}
+
+@media (min-width: 576px) {
+  .fooditemimg {
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 500px) {
+  .fooditemimg {
+    /*clear: none;*/
+    margin-bottom: -132px;
+  }
+}
+
+@media (max-width: 550px) {
+  .fooditemname, .fooditemdescription {
+    background-color: rgba(0,0,0,0.67);
+  }
+}
+
+.offers_img {
+  border-radius: 5px;
+}
+
+.offer_details {
+  margin-top: 52px;
+}
+
+.footer.bg-dark.footer {
+}
+
+.myfooter {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding: 0;
+}
+
+.table td-fit, .table th-fit {
+  white-space: nowrap;
+  width: 1%;
+}
+
+.cart-item-img {
+  max-width: 110px;
+}
+

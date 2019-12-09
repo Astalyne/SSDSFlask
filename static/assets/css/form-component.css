@@ -1,0 +1,35 @@
+.input-field {
+  border-radius: 5px;
+  border-style: groove;
+}
+
+.menu-form-label {
+  text-align: right;
+}
+
+@media (min-width:576px) {
+  .form-inline .form-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -ms-flex-align: center;
+    align-items: left;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width:576px) {
+  .form-inline label {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: left;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+}
+

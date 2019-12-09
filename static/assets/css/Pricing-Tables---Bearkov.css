@@ -1,0 +1,56 @@
+#price-table-list {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#price-table-main-div {
+  border-radius: 5px;
+  padding-top: 25px;
+  padding-right: 35px;
+  padding-bottom: 25px;
+  padding-left: 35px;
+  background-color: #363636;
+  color: white;
+  margin: 15px;
+}
+
+#price-table-below-button {
+  margin-top: 10px;
+  color: rgba(255,255,255,0.6);
+}
+
+#order-button {
+  border: 0px;
+  transition: all .2s ease-in-out;
+}
+
+#order-button:hover {
+  border: 0px;
+  transform: scale(1.1);
+}
+
+#order-button-middle {
+  background-color: rgba(255,255,255,0);
+  border-color: white;
+  border: 2px solid;
+  transition: all .2s ease-in-out;
+  width: 100%;
+}
+
+#order-button-middle:hover {
+  background-color: #479847;
+  border-color: #479847!important;
+  border: 2px solid;
+  transform: scale(1.1);
+  width: 100%;
+}
+
+#most-popular {
+  background-color: #479847;
+  margin-right: 70px;
+  margin-left: 70px;
+  border-radius: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+

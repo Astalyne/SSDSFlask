@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Shallalwebdesign</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aldrich">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat+Alternates">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/line-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="assets/css/dh-header-cover-image-button.css">
+    <link rel="stylesheet" href="assets/css/dh-row-text-image-right-responsive.css">
+    <link rel="stylesheet" href="assets/css/form-component.css">
+    <link rel="stylesheet" href="assets/css/Google-Products-Accordion.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/MUSA_panel-table-1.css">
+    <link rel="stylesheet" href="assets/css/MUSA_panel-table.css">
+    <link rel="stylesheet" href="assets/css/Material-Card.css">
+    <link rel="stylesheet" href="assets/css/Pricing-Tables---Bearkov.css">
+    <link rel="stylesheet" href="assets/css/Projects-Horizontal.css">
+    <link rel="stylesheet" href="assets/css/temp-table.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md sticky-top" style="background-color: rgba(225,225,225,0.76);">
+        <div class="container-fluid"><a class="navbar-brand" href="#" style="font-size: 24px;font-family: Aldrich, sans-serif;">Shallal</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse d-md-flex justify-content-md-end" id="navcol-1" style="font-size: 24px;">
+                <ul class="nav navbar-nav d-md-flex justify-content-md-start">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Menu.html">Menu</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Offers.html">Offers</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="order%20tracking.html">Order Tracking</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart" style="font-size: 25px;"></i></a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+
+    <div class="container checkout-box" style="margin-top: 30px;margin-bottom: 60px;">
+        <div class="row">
+<!-----------------------------CHECKOUT FORM!!!!!------------------------------------------------------>
+          <form class="col-12 form-inline" action="#" method="POST">
+<!-----------------------------user INFORMATION FORM!!!!!------------------------------------------------------>
+            <div class="col-12 col-lg-6" style="margin-top: 10px;">
+              {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+              <p class="alert alert-danger" role="alert">{{ message }}</p>
+              {% endfor %} {% endif %} {% endwith %}
+                <div role="tablist" id="accordion-1">
+                    <div class="card">
+                        <div class="card-header" role="tab">
+                            <h5 class="mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="#accordion-1 .item-1">Customer Information</a></h5>
+                        </div>
+                        <div class="collapse show item-1" role="tabpanel" data-parent="#accordion-1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div style="margin-bottom: 30px;">
+                                            <div class="form-group col-12"><label class="text-uppercase menu-form-label">First Name</label><input class="form-control col-12" type="text" name="firstName" placeholder="FIRST NAME"></div>
+                                            <div class="form-group col-12"><label class="text-uppercase menu-form-label">Last Name</label><input class="form-control col-12" type="text" name="lastName" placeholder="LAST NAME"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" role="tab">
+                            <h5 class="mb-0"><a data-toggle="collapse" aria-expanded="false" aria-controls="accordion-1 .item-2" href="#accordion-1 .item-2">Mobile number</a></h5>
+                        </div>
+                        <div class="collapse item-2" role="tabpanel" data-parent="#accordion-1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div style="margin-bottom: 30px;">
+                                            <div class="form-group col-12"><label class="text-uppercase menu-form-label">Mobile number</label><input class="form-control col-12" name="mobileNum" type="text"></div>
+                                            <div class="form-group col-12"><label class="text-uppercase menu-form-label">email address</label><input class="form-control col-12" name="email" type="text"></div>
+                                        </div style="margin-bottom: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-----------------------------/user INFORMATION FORM!!!!!------------------------------------------------------>
+<!-----------------------------ORDER SUMMARY  FORM!!!!!------------------------------------------------------>
+            <div class="col col-12 col-lg-6" style="margin-top: 10px;">
+                <ul class="list-group item-checkout" name='order_items'>
+                </ul>
+            </div>
+<!-----------------------------/ORDER SUMMARY  FORM!!!!!------------------------------------------------------>
+
+          </form>
+<!-----------------------------/CHECKOUT FORM!!!!!------------------------------------------------------>
+
+        </div>
+    </div>
+
+    <footer class="footer bg-dark" style="color: rgb(255,255,255);">
+        <div class="container">
+            <div class="row footer-row">
+                <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item"><a href="#">About</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Contact</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Terms of &nbsp;Use</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">© Shallal 2019. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/actions.js"></script>
+    <script src="assets/js/displaymenu.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+</body>
+
+</html>
