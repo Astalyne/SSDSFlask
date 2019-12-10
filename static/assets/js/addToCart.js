@@ -106,7 +106,8 @@ function checkout(){
 
 
 	var placeOrderBtn =$("<li class='list-group-item' id='place-order' style='padding: 0px;height: 45px;'></li>").append(
-										$('<button class="btn btn-danger" id="placeOrderBtn" onclick="placeOrder()" style="width: 100%;height: 100%;font-size: 20px;"></button>').text('PLACE ORDER')
-		);
+			
+										$('<button class="btn btn-danger"  id="placeOrderBtn" onclick="placeOrder()" style="width: 100%;height: 100%;font-size: 20px;"></button>').text('PLACE ORDER'))
+		
 	$(".item-checkout").append(placeOrderBtn);
 }

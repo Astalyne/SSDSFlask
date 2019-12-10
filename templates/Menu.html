@@ -546,7 +546,7 @@
     <div class="container checkout-box" style="margin-top: 30px;margin-bottom: 60px;">
         <div class="row">
 <!-----------------------------CHECKOUT FORM!!!!!------------------------------------------------------>
-<form method='POST'>
+<div class ="col-12">
 <!-----------------------------user INFORMATION FORM!!!!!------------------------------------------------------>
             <div class="col-12 col-lg-6" style="margin-top: 10px;">
               {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
@@ -646,21 +646,19 @@
         var Price =[];
         fooditem = document.getElementsByName('fooditemName');
         foodPrice = document.getElementsByName('fooditemPrice' );
-        // console.log(fooditem)
+        
        for (var i=0; i<foodPrice.length ; ++i){ Price[i] = foodPrice[i].innerHTML}
        for (var i=0; i<fooditem.length ; ++i){ item[i] = fooditem[i].innerHTML}
         var mobileNum = document.getElementsByName('mobileNum');
         var firstName = document.getElementsByName('firstName');
         var lastName = document.getElementsByName('lastName');
         $.ajax({
-            url: "/ShallalMenu",
+            url: "/orderRecieved",
             data: {mobileNum : mobileNum,firstName : firstName, lastName : lastName, fooditem:fooditem, foodPrice:foodPrice},
-            type: "POST",
-            processData: false,
+            type: "GET",
             dataType: 'json',
             success: function(data){
-              alert('works')
-              alert(data)
+            console.log("you are gay")
             }
         });
       /*  $.ajax({

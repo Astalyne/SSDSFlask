@@ -31,24 +31,33 @@ def showShallal():
     return render_template('index.html')
 
         # Getting food order
-@app.route('/ShallalMenu',methods=['GET', 'POST'])
+@app.route('/ShallalMenu')
 def customernewOrder():
     foodcategories = session.query(FoodCategory).all()
     foodItems      = session.query(FoodItem).all()
+  
+  
+    # Get all categories
+
+    return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
+
+@app.route('/orderRecieved' ,methods=["POST"])
+def showOrderRecieved():
+    print("showorderrecived called")
     if request.method == 'POST':
-        if not request.form['firstName']:
-            flash('Please enter your First Name')
-            return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
+#     if not request.form['firstName']:
+#         flash('Please enter your First Name')
+#         return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
 
-        if not request.form['lastName']:
-            flash('Please enter last name')
-            return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
+#     if not request.form['lastName']:
+#         flash('Please enter last name')
+#         return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
 
-        if not request.form['mobileNum']:
-            flash('Please enter mobileNum')
-            return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
+#     if not request.form['mobileNum']:
+#         flash('Please enter mobileNum')
+#         return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
 
-        #copied your new order def
+    #copied your new order def
         maxTID = session.query(Transaction).order_by(
         desc(Transaction.tid)).limit(1).first()
 
@@ -59,6 +68,7 @@ def customernewOrder():
         #code that gets foodname and price array. then loops and fills data in customer__order
         sum=0
         for x in request.form.getlist('fooditem[]') and y in request.form.getlist('foodPrice[]'):
+            print(request.form.getlist('fooditem[]')," ",request.form.getlist['foodPrice[]'])
             sum= sum+y
             print(x)
             fid=session.query(FoodItem).filter_by(name=x).first()
@@ -71,17 +81,11 @@ def customernewOrder():
         session.add(transaction)
 
 
-        return redirect(url_for('showOrderRecieved'))
-
+        return render_template('order_recieved.html')
     else:
-    # Get all categories
+        print("mohd fucked up")
 
-        return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
 
-@app.route('/orderRecieved')
-def showOrderRecieved():
-
-    return render_template('order_recieved.html')
 
 
 
