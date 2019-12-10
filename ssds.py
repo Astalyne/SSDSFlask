@@ -41,7 +41,7 @@ def customernewOrder():
 
     return render_template('Menu.html',foodItems=foodItems,foodcategories = foodcategories)
 
-@app.route('/orderRecieved' ,methods=["POST"])
+@app.route('/orderRecieved' ,methods=["GET","POST"])
 def showOrderRecieved():
     print("showorderrecived called")
     if request.method == 'POST':
@@ -60,30 +60,67 @@ def showOrderRecieved():
     #copied your new order def
         maxTID = session.query(Transaction).order_by(
         desc(Transaction.tid)).limit(1).first()
-
+        max=0
         if(maxTID==None):
             max=0
         else:
             max=maxTID.tid
-        #code that gets foodname and price array. then loops and fills data in customer__order
-        sum=0
-        for x in request.form.getlist('fooditem[]') and y in request.form.getlist('foodPrice[]'):
-            print(request.form.getlist('fooditem[]')," ",request.form.getlist['foodPrice[]'])
-            sum= sum+y
-            print(x)
-            fid=session.query(FoodItem).filter_by(name=x).first()
-            customerorder=CustomerOrder(tid=max+1,fid=fid.fid,qty=1,amt=float(y),stsid="S9")
+        items=request.form.getlist('item[]')
+        price=request.form.getlist('price[]')
+
+        fooditems=[]
+        quantifieditems=[]
+        for item in items:
+            food = item
+            qty=0
+            for it in items:
+                if it==item and it not in quantifieditems:
+                    qty=qty+1
+            f =[food,qty]
+            if qty!=0:
+                fooditems.append(f)
+            quantifieditems.append(item)
+
+        for item in fooditems:
+            foodid=session.query(FoodItem.fid).filter_by(name=item[0]).first()
+            price = session.query(FoodItem.price).filter_by(name=item[0]).first()
+            amt= price[0]*item[1]
+            item.append(foodid[0])
+            item.append(amt)
+        totalvalue=0
+        for item in fooditems:
+            customerorder=CustomerOrder(tid=max+1,fid=item[2],qty=item[1],amt=float(item[3]),stsid="S9")
+            totalvalue=totalvalue+item[3]
             session.add(customerorder)
             session.commit()
-
-        #Then fills transaction table
-        transaction = Transaction(tid=max+1,eid="E2",date=datetime.datetime.today(),totalamt=float(sum),stsid="S8")
+    	    print(customerorder)
+        transaction = Transaction(tid=max+1,eid="E2",date=datetime.datetime.today(),totalamt=float(totalvalue),stsid="S8")
         session.add(transaction)
-
-
+        session.commit()
+        print(transaction)
         return render_template('order_recieved.html')
     else:
-        return render_template('order_recieved.html')
+        return render_template('menu.html')
+    #   customerorder=CustomerOrder(tid=max+1,fid=fid.fid,qty=request.form['quantity'],amt=float(request.form['total']),stsid="S9")
+    #     session.add(customerorder)
+    #     session.commit()
+        #code that gets foodname and price array. then loops and fills data in customer__order
+
+        # sum=0
+        # for x in request.form.getlist('fooditem[]') and y in request.form.getlist('foodPrice[]'):
+        #     print(request.form.getlist('fooditem[]')," ",request.form.getlist['foodPrice[]'])
+        #     sum= sum+y
+        #     print(x)
+        #     fid=session.query(FoodItem).filter_by(name=x).first()
+        #     customerorder=CustomerOrder(tid=max+1,fid=fid.fid,qty=1,amt=float(y),stsid="S9")
+        #     session.add(customerorder)
+        #     session.commit()
+
+        # #Then fills transaction table
+        # transaction = Transaction(tid=max+1,eid="E2",date=datetime.datetime.today(),totalamt=float(sum),stsid="S8")
+        # session.add(transaction)
+
+
 
 
 
