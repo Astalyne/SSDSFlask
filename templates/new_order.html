@@ -70,7 +70,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+            <a class="navbar-brand" href="javascript:void(0)">Cashier New Order</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -165,11 +165,36 @@
                       </div>
                     </div>
                   </div>
-                  <button type="submit" formmethod="post" class="btn btn-primary">Add</button>
-    
+                  <button type="submit" name ="submit_button" formmethod="post" value ='add'class="btn btn-primary">Add</button>
+                  <button type="submit" name ="submit_button" formmethod="post" value='submit' class="btn btn-fill btn-primary">Submit Order</button>
+
                 </form>
               </div>
             </div>
+
+
+            <div class="card ">
+              <div class="card-header">
+                <h4 class="card-title">Current List</h4>
+              </div>
+              <div class="card-body">
+                <div class="column">
+                  <div class="col-3">
+                      <div class="form-group">
+
+                    <div class="list-group row" name='listiwant'>
+                        {% for order in currentOrder %}
+                      <a class="list-group-item list-group-item-action list-group-item-light text-center" style="width:750px" >
+                          Food ID: {{order.fid}} -  Food Quantity: {{order.qty}} - Food Amount: {{order.amt}}
+                      </a>
+                      {% endfor %}
+</div>
+                  </div>
+                  </div>
+
+            </div>
+          </div>
+          </div>
           </div>
   <!--   Core JS Files   -->
   <script src="/static/assets/js/core/jquery.min.js"></script>

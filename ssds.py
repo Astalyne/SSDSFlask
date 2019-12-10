@@ -83,7 +83,7 @@ def showOrderRecieved():
 
         return render_template('order_recieved.html')
     else:
-        print("mohd fucked up")
+        return render_template('order_recieved.html')
 
 
 
@@ -531,27 +531,39 @@ def editStatusType(ststid):
 
 @app.route('/cashier/newOrder',methods=['GET','POST'])
 def newOrder():
+    
     foodcategories=session.query(FoodCategory).all()
-    if request.method =='POST':
-        maxTID = session.query(Transaction).order_by(
-        desc(Transaction.tid)).limit(1).first()
-        
-        if(maxTID==None):
-            max=0
-        else:
-            max=maxTID.tid
-        transaction = Transaction(tid=max+1,eid="E2",date=datetime.datetime.today(),totalamt=float(request.form['total']),stsid="S8")
+
+    maxTID = session.query(Transaction).order_by(
+    desc(Transaction.tid)).limit(1).first()
+    max=0
+    if(maxTID==None):
+        max=0
+    else:
+        max=maxTID.tid
+    currentOrder = session.query(CustomerOrder).filter_by(tid=max+1).all()
+    if request.method =='POST'and request.form['submit_button'] == 'submit':
+        total = 0
+        currentOrder = session.query(CustomerOrder.amt).filter_by(tid=max+1).all()
+        for c in currentOrder:
+            total = total+c[0]
+        transaction = Transaction(tid=max+1,eid="E2",date=datetime.datetime.today(),totalamt=float(total),stsid="S8")
         session.add(transaction)
-        print(request.form['food'])
+        return redirect(url_for('newOrder'))
+
+    if request.method =='POST'and request.form['submit_button'] == 'add':
+        total = 0
+        total = total + int(request.form['total'])
+  
         fid=session.query(FoodItem).filter_by(name=request.form['food']).first()
         customerorder=CustomerOrder(tid=max+1,fid=fid.fid,qty=request.form['quantity'],amt=float(request.form['total']),stsid="S9")
         session.add(customerorder)
         session.commit()
-        return render_template("new_order.html",foodcategories=foodcategories)
+        return redirect(url_for('newOrder'))
+        # return render_template("new_order.html",foodcategories=foodcategories)
     else: 
-        customerOrders=session.query(CustomerOrder).all()
-        print(customerOrders)
-        return render_template('new_order.html',foodcategories=foodcategories,customerOrders=customerOrders)
+ 
+        return render_template('new_order.html',foodcategories=foodcategories,currentOrder=currentOrder)
 
 @app.route('/cashier/orderList',methods=['GET'])
 def orderlist():
@@ -655,6 +667,7 @@ def _get_status():
 
 
 if __name__ == '__main__':
+
     app.secret_key = 'super_secret_key'
     app.debug = True
     app.run(host='0.0.0.0', port=5000)

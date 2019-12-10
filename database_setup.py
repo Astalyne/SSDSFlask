@@ -101,9 +101,9 @@ class Transaction(Base):
 class CustomerOrder(Base):
     __tablename__='customer_order'
     tid=Column(Integer,nullable=False,primary_key=True)
-    fid=Column(Integer, ForeignKey("fooditem.fid"),nullable=False)
-    qty=Column(Integer,nullable=False)
-    amt=Column(Integer,nullable=False)
+    fid=Column(Integer, ForeignKey("fooditem.fid"),nullable=False, primary_key=True)
+    qty=Column(Integer,nullable=False,primary_key=True)
+    amt=Column(Integer,nullable=False,primary_key=True)
     stsid=Column(String(10), ForeignKey("status.stsid"),nullable=False)
     # @property
     # def serialize(self):
